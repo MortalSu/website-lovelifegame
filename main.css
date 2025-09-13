@@ -9,7 +9,9 @@ body {
     overflow-x: hidden;
     height: 100vh;
 }
-
+.hidden {
+  display: none;
+}
 .nav-bar {
     background: rgba(255, 255, 255, 0.7);
     padding: 5px 5px;
@@ -728,3 +730,4 @@ footer p {
     margin: 5px 0;
     font-size: 1rem;
 }
+
