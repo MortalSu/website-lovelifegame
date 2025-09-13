@@ -145,23 +145,34 @@ document.querySelectorAll('#introduction, .pop-in-image-container, #character-pr
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      const country = (data.country_name || data.country || "").toLowerCase();
-      if (country === "india" || country === "in") {
-        document.getElementById("whatsapp").classList.remove("hidden");
-        document.getElementById("discord").classList.add("hidden");
-        document.getElementById("patreon").classList.add("hidden");
-      } else {
-        document.getElementById("discord").classList.remove("hidden");
-        document.getElementById("patreon").classList.remove("hidden");
-        document.getElementById("whatsapp").classList.add("hidden");
-      }
-    })
-    .catch(() => {
-      document.getElementById("discord").classList.remove("hidden");
-      document.getElementById("patreon").classList.remove("hidden");
-      document.getElementById("whatsapp").classList.remove("hidden");
-    });
+    const discord = document.getElementById("discord");
+    const patreon = document.getElementById("patreon");
+    const whatsapp = document.getElementById("whatsapp");
+
+    if (!discord || !patreon || !whatsapp) {
+        console.error("One or more elements not found:", { discord, patreon, whatsapp });
+        return;
+    }
+
+    fetch("https://ipapi.co/json/")
+        .then(res => res.json())
+        .then(data => {
+            console.log("API Response:", data);
+            const country = (data.country_name || data.country || "").toLowerCase().trim();
+            if (country === "india" || country === "in") {
+                whatsapp.classList.remove("hidden");
+                discord.classList.add("hidden");
+                patreon.classList.add("hidden");
+            } else {
+                discord.classList.remove("hidden");
+                patreon.classList.remove("hidden");
+                whatsapp.classList.add("hidden");
+            }
+        })
+        .catch(error => {
+            console.error("API fetch failed:", error);
+            discord.classList.remove("hidden");
+            patreon.classList.remove("hidden");
+            whatsapp.classList.remove("hidden");
+        });
 });
