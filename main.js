@@ -144,23 +144,24 @@ document.querySelectorAll('#introduction, .pop-in-image-container, #character-pr
     observer.observe(section);
 });
 
-fetch("https://ipapi.co/json/")
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("https://ipapi.co/json/")
     .then(res => res.json())
     .then(data => {
-        const country = (data.country_name || data.country || "").toLowerCase();
-        if (country === "india" || country === "in") {
-            document.getElementById("whatsapp").classList.remove("hidden");
-            document.getElementById("discord").classList.add("hidden");
-            document.getElementById("patreon").classList.add("hidden");
-        } else {
-            document.getElementById("discord").classList.remove("hidden");
-            document.getElementById("patreon").classList.remove("hidden");
-            document.getElementById("whatsapp").classList.add("hidden");
-        }
-    })
-    .catch(() => {
+      const country = (data.country_name || data.country || "").toLowerCase();
+      if (country === "india" || country === "in") {
+        document.getElementById("whatsapp").classList.remove("hidden");
+        document.getElementById("discord").classList.add("hidden");
+        document.getElementById("patreon").classList.add("hidden");
+      } else {
         document.getElementById("discord").classList.remove("hidden");
         document.getElementById("patreon").classList.remove("hidden");
-        document.getElementById("whatsapp").classList.remove("hidden");
+        document.getElementById("whatsapp").classList.add("hidden");
+      }
+    })
+    .catch(() => {
+      document.getElementById("discord").classList.remove("hidden");
+      document.getElementById("patreon").classList.remove("hidden");
+      document.getElementById("whatsapp").classList.remove("hidden");
     });
-
+});
