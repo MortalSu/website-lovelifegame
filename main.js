@@ -143,36 +143,3 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('#introduction, .pop-in-image-container, #character-preview, #images, #links, #contact').forEach(section => {
     observer.observe(section);
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    const discord = document.getElementById("discord");
-    const patreon = document.getElementById("patreon");
-    const whatsapp = document.getElementById("whatsapp");
-
-    if (!discord || !patreon || !whatsapp) {
-        console.error("One or more elements not found:", { discord, patreon, whatsapp });
-        return;
-    }
-
-    fetch("https://ipapi.co/json/")
-        .then(res => res.json())
-        .then(data => {
-            console.log("API Response:", data);
-            const country = (data.country_name || data.country || "").toLowerCase().trim();
-            if (country === "india" || country === "in") {
-                whatsapp.classList.remove("hidden");
-                discord.classList.add("hidden");
-                patreon.classList.add("hidden");
-            } else {
-                discord.classList.remove("hidden");
-                patreon.classList.remove("hidden");
-                whatsapp.classList.add("hidden");
-            }
-        })
-        .catch(error => {
-            console.error("API fetch failed:", error);
-            discord.classList.remove("hidden");
-            patreon.classList.remove("hidden");
-            whatsapp.classList.remove("hidden");
-        });
-});
