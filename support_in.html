@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden-content {
+            display: none;
+        }
+    </style>
+    <script src='https://unpkg.com/pay-via-upi-lib' async data-name="pay-via-upi" data-cfasync="false"
+        data-pa="animemansujal@oksbi" data-tn="" data-cu="INR" data-pn="BrotherSu" data-amount_list="20,50,100,200"
+        data-label="Support Bro 🇮🇳" data-description="Scan and Pay using UPI!" data-color="#000"
+        data-position="Right"></script>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="py-8 bg-white shadow-md">
+        <h1 class="text-4xl font-bold text-center text-gray-800 flex justify-center items-center gap-2">
+            UPI Support
+            <img src="https://flagcdn.com/w40/in.png" alt="India Flag" class="h-8 inline-block" />
+        </h1>
+        <h5 class="text-xl font-medium text-center text-gray-600 mt-5 mr-10">
+            LoveLife Studio
+        </h5>
+    </header>
+
+
+    <!-- Buttons -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-6">
+
+                <!-- Phone Number Button -->
+                <button onclick="showContent('phone')"
+                    class="px-6 py-3 bg-white rounded-lg shadow-md hover:bg-blue-50 transition-all duration-300 text-gray-700 font-medium">
+                    UPI via Phone Number
+                </button>
+
+                <!-- UPI ID Button -->
+                <button onclick="showContent('upiid')"
+                    class="px-6 py-3 bg-white rounded-lg shadow-md hover:bg-blue-50 transition-all duration-300 text-gray-700 font-medium">
+                    UPI via ID
+                </button>
+
+                <!-- Pay Embed Button (mobile only) -->
+                <button id="payembed-btn" onclick="showContent('payembed')"
+                    class="px-6 py-3 bg-white rounded-lg shadow-md hover:bg-blue-50 transition-all duration-300 text-gray-700 font-medium">
+                    Pay Embed
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Display Content -->
+    <section class="py-6">
+        <div class="container mx-auto px-4 text-center">
+
+            <!-- Phone Number -->
+            <div id="phone" class="hidden-content">
+                <p class="text-xl font-medium text-gray-800">Pay via Phone Number:</p>
+                <p class="mt-2 text-lg text-gray-600">📱 +91 7762831361</p>
+            </div>
+
+            <!-- UPI ID -->
+            <div id="upiid" class="hidden-content">
+                <p class="text-xl font-medium text-gray-800">Pay via UPI ID:</p>
+                <p class="mt-2 text-lg text-gray-600">💳 animemansujal@oksbi</p>
+            </div>
+
+            <!-- Pay Embed -->
+            <div id="payembed" class="hidden-content">
+                <div class="flex justify-center">
+                    <a id="pay-link"
+                        href="https://donateviaupi.com/animemansujal@oksbi?pn=BrotherSu&amount_list=20,50,100,200"
+                        target="_blank">
+                        <img style="width:160px; height:40px;" src="https://donateviaupi.com/default-sky.png"
+                            alt="donate via upi button" />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        function showContent(id) {
+            // Hide all sections
+            document.querySelectorAll('.hidden-content').forEach(el => el.style.display = 'none');
+            // Show clicked
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // Detect if device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
+        // Hide Pay Embed button if not mobile
+        window.onload = function () {
+            if (!isMobileDevice()) {
+                document.getElementById("payembed-btn").style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+
+</html>
